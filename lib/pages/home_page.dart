@@ -127,8 +127,8 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0), // Add padding to position the text
+                    const Padding(
+                      padding: EdgeInsets.all(16.0), // Add padding to position the text
                       child: Text(
                         "Experience",
                         style: TextStyle(

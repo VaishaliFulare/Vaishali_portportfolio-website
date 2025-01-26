@@ -1,16 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../constants/colors.dart';
 
 class MainMobile extends StatelessWidget {
   const MainMobile({super.key});
 
+  Future<void> _launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final screenWidth = screenSize.width;
-    final screenHeight=screenSize.height;
+    final screenHeight = screenSize.height;
+
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 40.0,
@@ -35,7 +46,7 @@ class MainMobile extends StatelessWidget {
             blendMode: BlendMode.srcATop,
             child: Image.asset(
               "assets/p.png",
-              width: screenWidth / 3, // Adjust width as per design
+              width: screenWidth / 2, // Adjust width as per design
             ),
           ),
           const SizedBox(height: 30), // Add spacing between the image and text
@@ -60,10 +71,10 @@ class MainMobile extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                // Define your action here
+                _launchURL('https://drive.google.com/file/d/1QVyh8i71VWs3YlrL_FeDK5PYZSxd-uy4/view?usp=drive_link'); // Replace with your link
               },
               child: const Text(
-                "Get in touch",
+                "Download Resume",
                 style: TextStyle(
                   fontSize: 16, // Adjust font size for readability
                   color: CustomColors.whitePrimary,
@@ -76,3 +87,4 @@ class MainMobile extends StatelessWidget {
     );
   }
 }
+
